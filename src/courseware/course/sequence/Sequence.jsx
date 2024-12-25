@@ -181,6 +181,7 @@ const Sequence = ({
             <a className="btn btn-primary" 
               href={urlStudio}>CodeBlock</a>
           </span>
+          
           <SequenceContent
             courseId={courseId}
             gated={gated}
