@@ -296,6 +296,12 @@
     padding-left: 40px;
     padding-right: 40px;
   }
+
+  .code-block-button {
+    display: flex;
+    padding: 5px 10px;
+    flex-direction: row-reverse;
+  }
 }
 
 .unit-iframe-wrapper {

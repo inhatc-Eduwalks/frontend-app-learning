@@ -24,6 +24,7 @@ import messages from './messages';
 import HiddenAfterDue from './hidden-after-due';
 import { SequenceNavigation, UnitNavigation } from './sequence-navigation';
 import SequenceContent from './SequenceContent';
+import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 
 const Sequence = ({
   unitId,
@@ -139,6 +140,18 @@ const Sequence = ({
 
   const gated = sequence && sequence.gatedContent !== undefined && sequence.gatedContent.gated;
 
+  const userEmail = getAuthenticatedUser().email;
+
+  const queryParams = new URLSearchParams({
+    course_id: courseId,
+    block_id: unitId,
+    email: userEmail,
+  }).toString();
+
+  console.log(queryParams);
+
+  const urlStudio = `http://jupyter.jwjung.org/?${queryParams}`;
+
   const defaultContent = (
     <div className="sequence-container d-inline-flex flex-row w-100">
       <div className={classNames('sequence w-100', { 'position-relative': shouldDisplayNotificationTriggerInSequence })}>
@@ -164,6 +177,10 @@ const Sequence = ({
         </div>
 
         <div className="unit-container flex-grow-1">
+          <span className="mx-1 my-1 code-block-button">
+            <a className="btn btn-primary" 
+              href={urlStudio}>CodeBlock</a>
+          </span>
           <SequenceContent
             courseId={courseId}
             gated={gated}
